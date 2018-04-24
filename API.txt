@@ -1,0 +1,1 @@
+Integración de Cloudinary con PHP para carga masiva de imágenes desde cualquier pc/desktop, con sus correspondientes metadatos
