@@ -33,36 +33,54 @@ require 'main.php';
         <center>
           <div id="logo">
             <!-- This will render the image fetched from a remote HTTP URL using Cloudinary -->
-            <?php echo fetch_image_tag("http://cloudinary.com/images/logo.png") ?>
+            <!-- <?php echo fetch_image_tag("http://cloudinary.com/images/logo.png") ?> -->
+            <img src="logo-cloudinary.png" alt="logo">
           </div>
 
           <div id='backend_upload'>
             <h1>Seleccione las imágenes que desea subir a Cloudinary</h1>
+            <?php if(isset($_GET['vacios']) && $_GET['vacios'] == true): ?>
+              <div class="alert alert-danger alert-dismissible ocultar" id="avisovacios" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <p class="centrar">
+                  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+                  <strong>Error!</strong>&nbsp;Debes llenar todos los campos con <span class="required"> * </span>obligatoriamente
+                </p>
+              </div>
+            <?php endif; ?>
             <form class="form-horizontal" action="upload_backend.php" method="post" enctype="multipart/form-data">
               <input class="form-control" id="fileupload" type="file" name="files[]" multiple accept="image/gif, image/jpeg, image/png">
-              <!-- <?php echo cl_image_upload_tag("image_id",
-                    array("html" => array("multiple" => TRUE ))); ?> -->
 
               <br/>
-              <label class="">Carpeta destino</label>
-              <input class="form-control" type="text" name="folder" placeholder="Ingresar nombre carpeta donde desea cargar la imágen" size="45">
+              <label class="">Carpeta destino <span class="required"> * </span></label>
+              <input class="form-control" type="text" name="folder" placeholder="Ingresar nombre carpeta en Cloudinary donde desea cargar la imágen">
+              <br/>
+              <label>Ingrese el color <span class="required"> * </span></label>
+              <input type="text" class="form-control" name="colour" placeholder="Ingresar color">
+              <br/>
+              <label>Tipo de imágen <span class="required"> * </span></label>
+              <select class="form-control" name="type" id="type" onchange="select_type()">
+                <option value="">-----</option>
+                <option value="top">Top</option>
+                <option value="bottom">Bottom</option>
+                <option value="set">Set</option>
+                <option value="cut">Cut</option>
+              </select>
+              <br/>
+              <div id="oculto">
+                <label>Stylecode para la imágen</label>
+                <input class="form-control oculto" type="text" name="stylecode" placeholder="Stylecode">
+              </div>
               <br/><br/>
               <input class="btn-primary" type="submit" value="Upload" id="btn-upload">
             </form>
           </div>
         </center>
-        <?php if(isset($_GET['vacios']) && $_GET['vacios'] == true): ?>
-          <div class="alert alert-danger alert-dismissible ocultar" id="avisovacios" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <p class="centrar">
-              <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
-              <strong>Error!</strong>&nbsp;Debes llenar todos los campos
-            </p>
-          </div>
-        <?php endif; ?>
       </div>
     </div>
   </body>
+
+    <script src="js/scripts.js"></script>
 </html>

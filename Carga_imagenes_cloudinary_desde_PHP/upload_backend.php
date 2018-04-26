@@ -3,21 +3,82 @@ require 'main.php';
 function create_photo($file_path, $orig_name )
 {
   $folder = $_POST['folder'];
-  //
-  // echo "<pre>";
-  // var_dump($file_path);
-  // exit;
-  if ($file_path == "" || $folder == "")
+  $colour = $_POST['colour'];
+  $type = $_POST['type'];
+  $stylecode = $_POST['stylecode'];
+
+  if ($file_path == "" || $folder == "" || $type == "")
   {
     header("Location: upload.php?vacios=true");
   }
   else
   {
-    $result = \Cloudinary\Uploader::upload($file_path, array(
-      "tags" => $orig_name,
-      "public_id" => $folder . "/" . $orig_name,
-      "image_metadata" => false
-    ));
+    switch ($type) {
+      case 'top':
+        $result = \Cloudinary\Uploader::upload($file_path, array(
+          "tags" => "",
+          "public_id" => $folder . "/" . substr($orig_name, 0, 9),
+          "image_metadata" => false,
+          "context" => array
+              (
+                "stylecode" => substr($orig_name, 0, 9),
+                "imagetype" => "high res",
+                "grouped" => "false",
+                "colour" => $colour
+              ),
+        ));
+        break;
+
+        case 'bottom':
+        $result = \Cloudinary\Uploader::upload($file_path, array(
+          "tags" => "",
+          "public_id" => $folder . "/" . trim(str_replace('.jpg', "", $orig_name)),
+          "image_metadata" => false,
+          "context" => array
+              (
+                "stylecode" => strtoupper($stylecode),
+                "imagetype" => "high res",
+                "grouped" => "true",
+                "colour" => $colour
+              ),
+        ));
+        break;
+
+        case 'set':
+        $result = \Cloudinary\Uploader::upload($file_path, array(
+          "tags" => "",
+          "public_id" => $folder . "/" . trim(str_replace('.jpg', "", $orig_name)),
+          "image_metadata" => false,
+          "context" => array
+              (
+                "stylecode" => strtoupper($stylecode),
+                "imagetype" => "high res",
+                "grouped" => "true",
+                "colour" => $colour
+              ),
+        ));
+        break;
+
+        case 'cut':
+        $result = \Cloudinary\Uploader::upload($file_path, array(
+          "tags" => "",
+          "public_id" => $folder . "/" . substr($orig_name, 0, 9),
+          "image_metadata" => false,
+          "context" => array
+              (
+                "stylecode" => substr($orig_name, 0, 9),
+                "imagetype" => "high res",
+                "grouped" => "true",
+                "colour" => $colour
+              ),
+        ));
+        break;
+
+      default:
+        header('Location: upload.php');
+        break;
+    }
+
     {
     }
     unlink($file_path);
