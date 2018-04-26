@@ -67,13 +67,14 @@ require 'main.php';
                 <option value="bottom">Bottom</option>
                 <option value="set">Set</option>
                 <option value="cut">Cut</option>
+                <option value="accesories">Accesories</option>
               </select>
               <br/>
               <div id="oculto">
                 <label>Stylecode para la imágen</label>
                 <input class="form-control oculto" type="text" name="stylecode" placeholder="Stylecode">
               </div>
-              <br/><br/>
+              <br/>
               <input class="btn-primary" type="submit" value="Upload" id="btn-upload">
             </form>
           </div>

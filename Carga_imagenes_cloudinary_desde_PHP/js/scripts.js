@@ -24,4 +24,9 @@ function select_type()
     $('#oculto').hide('low');
   }
 
+  if (type == "accesories")
+  {
+    $('#oculto').hide('low');
+  }
+
 }

@@ -17,7 +17,7 @@ function create_photo($file_path, $orig_name )
       case 'top':
         $result = \Cloudinary\Uploader::upload($file_path, array(
           "tags" => "",
-          "public_id" => $folder . "/" . substr($orig_name, 0, 9),
+          "public_id" => $folder . "/" . trim(str_replace('.jpg', "", $orig_name)),
           "image_metadata" => false,
           "context" => array
               (
@@ -30,53 +30,67 @@ function create_photo($file_path, $orig_name )
         break;
 
         case 'bottom':
-        $result = \Cloudinary\Uploader::upload($file_path, array(
-          "tags" => "",
-          "public_id" => $folder . "/" . trim(str_replace('.jpg', "", $orig_name)),
-          "image_metadata" => false,
-          "context" => array
-              (
-                "stylecode" => strtoupper($stylecode),
-                "imagetype" => "high res",
-                "grouped" => "true",
-                "colour" => $colour
-              ),
-        ));
+          $result = \Cloudinary\Uploader::upload($file_path, array(
+            "tags" => "",
+            "public_id" => $folder . "/" . trim(str_replace('.jpg', "", $orig_name)),
+            "image_metadata" => false,
+            "context" => array
+                (
+                  "stylecode" => strtoupper($stylecode),
+                  "imagetype" => "high res",
+                  "grouped" => "true",
+                  "colour" => $colour
+                ),
+          ));
         break;
 
         case 'set':
-        $result = \Cloudinary\Uploader::upload($file_path, array(
-          "tags" => "",
-          "public_id" => $folder . "/" . trim(str_replace('.jpg', "", $orig_name)),
-          "image_metadata" => false,
-          "context" => array
-              (
-                "stylecode" => strtoupper($stylecode),
-                "imagetype" => "high res",
-                "grouped" => "true",
-                "colour" => $colour
-              ),
-        ));
+          $result = \Cloudinary\Uploader::upload($file_path, array(
+            "tags" => "",
+            "public_id" => $folder . "/" . trim(str_replace('.jpg', "", $orig_name)),
+            "image_metadata" => false,
+            "context" => array
+                (
+                  "stylecode" => strtoupper($stylecode),
+                  "imagetype" => "high res",
+                  "grouped" => "true",
+                  "colour" => $colour
+                ),
+          ));
         break;
 
         case 'cut':
-        $result = \Cloudinary\Uploader::upload($file_path, array(
-          "tags" => "",
-          "public_id" => $folder . "/" . substr($orig_name, 0, 9),
-          "image_metadata" => false,
-          "context" => array
-              (
-                "stylecode" => substr($orig_name, 0, 9),
-                "imagetype" => "high res",
-                "grouped" => "true",
-                "colour" => $colour
-              ),
-        ));
+          $result = \Cloudinary\Uploader::upload($file_path, array(
+            "tags" => "",
+            "public_id" => $folder . "/" . substr($orig_name, 0, 9),
+            "image_metadata" => false,
+            "context" => array(
+                  "stylecode" => substr($orig_name, 0, 9),
+                  "imagetype" => "swatch",
+                  "grouped" => "true",
+                  "colour" => $colour
+                ),
+          ));
+        break;
+
+        case 'accesories':
+          $result = \Cloudinary\Uploader::upload($file_path, array(
+            "tags" => "",
+            "public_id" => $folder . "/" . trim(str_replace('.jpg', "", $orig_name)),
+            "image_metadata" => false,
+            "context" => array
+                (
+                  "stylecode" => substr($orig_name, 0, 9),
+                  "imagetype" => "high res",
+                  "grouped" => "false",
+                  "colour" => $colour
+                ),
+          ));
         break;
 
       default:
         header('Location: upload.php');
-        break;
+      break;
     }
 
     {
@@ -98,7 +112,7 @@ foreach ($files["tmp_name"] as $index => $value) {
 <html>
 <head>
   <link href="style.css" media="all" rel="stylesheet"/>
-  <title>Carga Satisfactoria!</title>
+  <title>Successfull Upload!</title>
 </head>
 <body>
 
@@ -106,7 +120,7 @@ foreach ($files["tmp_name"] as $index => $value) {
   <h2>Detalles de la carga</h2>
   <?php
   foreach ($files_data as $file_data) {
-    \PhotoAlbum\array_to_table($file_data);
+    \PhotoAlbum\array_to_table($file_data) . "<br/>";
   }
   ?>
   <br/>
