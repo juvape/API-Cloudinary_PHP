@@ -38,7 +38,7 @@ require 'main.php';
           </div>
 
           <div id='backend_upload'>
-            <h1>Seleccione las imágenes que desea subir a Cloudinary</h1>
+            <h1>Seleccione las imágenes que desea subir a Cloudinary (imágenes no mayores a 3.5 MB)</h1>
             <?php if(isset($_GET['vacios']) && $_GET['vacios'] == true): ?>
               <div class="alert alert-danger alert-dismissible ocultar" id="avisovacios" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="close">
@@ -52,7 +52,6 @@ require 'main.php';
             <?php endif; ?>
             <form class="form-horizontal" action="upload_backend.php" method="post" enctype="multipart/form-data">
               <input class="form-control" id="fileupload" type="file" name="files[]" multiple accept="image/gif, image/jpeg, image/png">
-
               <br/>
               <label class="">Carpeta destino <span class="required"> * </span></label>
               <input class="form-control" type="text" name="folder" placeholder="Ingresar nombre carpeta en Cloudinary donde desea cargar la imágen">
@@ -63,11 +62,11 @@ require 'main.php';
               <label>Tipo de imágen <span class="required"> * </span></label>
               <select class="form-control" name="type" id="type" onchange="select_type()">
                 <option value="">-----</option>
-                <option value="top">Top</option>
-                <option value="bottom">Bottom</option>
+                <option value="top">Top (3 level)</option>
+                <option value="bottom">Bottom (4 level)</option>
                 <option value="set">Set</option>
-                <option value="cut">Cut</option>
-                <option value="accesories">Accesories</option>
+                <option value="cut">Cut (4 level)</option>
+                <option value="accesories">Accesories (single level)</option>
               </select>
               <br/>
               <div id="oculto">
@@ -75,7 +74,14 @@ require 'main.php';
                 <input class="form-control oculto" type="text" name="stylecode" placeholder="Stylecode">
               </div>
               <br/>
-              <input class="btn-primary" type="submit" value="Upload" id="btn-upload">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-md-offset-2">
+                  <input class="btn-primary" type="submit" value="Subir" id="btn-upload">
+                </div>
+                <div class="col-xs-12 col-sm-12 col-m-4 col-lg-4">
+                  <input class="btn-default" type="reset" value="Limpiar" id="reset">
+                </div>
+              </div>
             </form>
           </div>
         </center>
@@ -83,5 +89,5 @@ require 'main.php';
     </div>
   </body>
 
-    <script src="js/scripts.js"></script>
+  <script src="js/scripts.js"></script>
 </html>

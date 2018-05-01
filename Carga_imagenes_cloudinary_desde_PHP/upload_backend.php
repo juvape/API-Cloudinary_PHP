@@ -1,6 +1,7 @@
 <?php
 require 'main.php';
-function create_photo($file_path, $orig_name )
+
+function create_photo($file_path, $orig_name)
 {
   $folder = $_POST['folder'];
   $colour = $_POST['colour'];
@@ -124,7 +125,10 @@ foreach ($files["tmp_name"] as $index => $value) {
   }
   ?>
   <br/>
-  <?php echo cl_image_tag($file_data['public_id'], array_merge($thumbs_params, array( "crop" => "fill", "class" => "img-responsive", "alt" => "responsive image" ))); ?>
+  <?php echo cl_image_tag($file_data['public_id'], array_merge($thumbs_params, array(
+                                                              "crop" => "fill",
+                                                              "class" => "img-responsive",
+                                                              "alt" => "responsive image" ))); ?>
   <br/>
   <br/>
   <a href="upload.php" class="back_link">Volver</a>

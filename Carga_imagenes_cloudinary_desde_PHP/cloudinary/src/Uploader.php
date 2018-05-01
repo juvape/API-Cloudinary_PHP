@@ -2,6 +2,8 @@
 
 namespace Cloudinary {
 
+  set_time_limit(0);
+
     class Uploader
     {
         const REMOTE_URL_REGEX = '/^@|^ftp:|^https?:|^s3:|^data:[^;]*;base64,([a-zA-Z0-9\/+\n=]+)$/';
@@ -371,7 +373,7 @@ namespace Cloudinary {
             }
 
             curl_setopt($ch, CURLOPT_POST, true);
-            $timeout = \Cloudinary::option_get($options, "timeout", \Cloudinary::config_get("timeout", 60));
+            $timeout = \Cloudinary::option_get($options, "timeout", \Cloudinary::config_get("timeout", 360));//60 por defecto
             curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
             $connection_timeout = \Cloudinary::option_get(
                 $options,

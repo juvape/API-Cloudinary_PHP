@@ -60,3 +60,5 @@ td { vertical-align: top; padding-right: 5px; }
 .required{color: red}
 
 #oculto{display: none;}
+
+#reset{border-radius: 3px; background: #F1F1F1;}
