@@ -38,7 +38,7 @@ require 'main.php';
           </div>
 
           <div id='backend_upload'>
-            <h1>Seleccione las imágenes que desea subir a Cloudinary (imágenes no mayores a 3.5 MB)</h1>
+            <h1>Seleccione las imágenes que desea subir a Cloudinary (Puede cargar hasta 10 imágenes, mientras el peso no supere los 7 MB)</h1>
             <?php if(isset($_GET['vacios']) && $_GET['vacios'] == true): ?>
               <div class="alert alert-danger alert-dismissible ocultar" id="avisovacios" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="close">

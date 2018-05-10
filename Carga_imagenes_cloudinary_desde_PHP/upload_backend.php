@@ -3,6 +3,7 @@ require 'main.php';
 
 function create_photo($file_path, $orig_name)
 {
+
   $folder = $_POST['folder'];
   $colour = $_POST['colour'];
   $type = $_POST['type'];
@@ -11,12 +12,14 @@ function create_photo($file_path, $orig_name)
   if ($file_path == "" || $folder == "" || $type == "")
   {
     header("Location: upload.php?vacios=true");
+    exit;
   }
   else
   {
     switch ($type) {
       case 'top':
-        $result = \Cloudinary\Uploader::upload($file_path, array(
+        $result = \Cloudinary\Uploader::upload($file_path,array(
+          "timeout" => 360,
           "tags" => "",
           "public_id" => $folder . "/" . trim(str_replace('.jpg', "", $orig_name)),
           "image_metadata" => false,
@@ -32,6 +35,7 @@ function create_photo($file_path, $orig_name)
 
         case 'bottom':
           $result = \Cloudinary\Uploader::upload($file_path, array(
+            "timeout" => 360,
             "tags" => "",
             "public_id" => $folder . "/" . trim(str_replace('.jpg', "", $orig_name)),
             "image_metadata" => false,
@@ -47,6 +51,7 @@ function create_photo($file_path, $orig_name)
 
         case 'set':
           $result = \Cloudinary\Uploader::upload($file_path, array(
+            "timeout" => 360,
             "tags" => "",
             "public_id" => $folder . "/" . trim(str_replace('.jpg', "", $orig_name)),
             "image_metadata" => false,
@@ -62,6 +67,7 @@ function create_photo($file_path, $orig_name)
 
         case 'cut':
           $result = \Cloudinary\Uploader::upload($file_path, array(
+            "timeout" => 360,
             "tags" => "",
             "public_id" => $folder . "/" . substr($orig_name, 0, 9),
             "image_metadata" => false,
@@ -76,6 +82,7 @@ function create_photo($file_path, $orig_name)
 
         case 'accesories':
           $result = \Cloudinary\Uploader::upload($file_path, array(
+            "timeout" => 360,
             "tags" => "",
             "public_id" => $folder . "/" . trim(str_replace('.jpg', "", $orig_name)),
             "image_metadata" => false,
@@ -97,7 +104,7 @@ function create_photo($file_path, $orig_name)
     {
     }
     unlink($file_path);
-    error_log("Upload result: " . \PhotoAlbum\ret_var_dump($result));
+    // error_log("Upload result: " . \PhotoAlbum\ret_var_dump($result));
     // $photo = \PhotoAlbum\create_photo_model($result);
     return $result;
 
@@ -125,10 +132,13 @@ foreach ($files["tmp_name"] as $index => $value) {
   }
   ?>
   <br/>
-  <?php echo cl_image_tag($file_data['public_id'], array_merge($thumbs_params, array(
-                                                              "crop" => "fill",
-                                                              "class" => "img-responsive",
-                                                              "alt" => "responsive image" ))); ?>
+  <?php
+    echo cl_image_tag($file_data['public_id'],
+                      array_merge($thumbs_params, array(
+                                                  "crop" => "fill",
+                                                  "class" => "img-responsive",
+                                                  "alt" => "responsive image" )));
+  ?>
   <br/>
   <br/>
   <a href="upload.php" class="back_link">Volver</a>

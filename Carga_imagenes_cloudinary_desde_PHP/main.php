@@ -1,10 +1,10 @@
 <?php
 namespace PhotoAlbum {
-  require 'lib/rb.php';
+  // require 'lib/rb.php';
   require 'cloudinary/src/Cloudinary.php';
   require 'cloudinary/src/Uploader.php';
   require 'cloudinary/src/Api.php'; // Only required for creating upload presets on the fly
-  require 'cloudinary/src/Error.php';
+  // require 'cloudinary/src/Error.php';
   error_reporting(E_ALL | E_STRICT);
   // Sets up Cloudinary's parameters and RB's DB
   include 'settings.php.sample';
@@ -39,18 +39,18 @@ namespace PhotoAlbum {
     echo "</table>";
     error_reporting($saved_error_reporting);
   }
-  function create_photo_model($options = array()) {
-    $photo = \R::dispense('photo');
-    foreach ( $options as $key => $value ) {
-      if ($key != 'tags') {
-        $photo->{$key} = $value;
-      }
-    }
-    # Add metadata we want to keep:
-    $photo->moderated = false;
-    $photo->created_at = (array_key_exists('created_at', $photo) ?
-      DateTime::createFromFormat(DateTime::ISO8601, $photo->created_at) :
-      \R::isoDateTime());
-    $id = \R::store($photo);
-  }
+  // function create_photo_model($options = array()) {
+  //   $photo = \R::dispense('photo');
+  //   foreach ( $options as $key => $value ) {
+  //     if ($key != 'tags') {
+  //       $photo->{$key} = $value;
+  //     }
+  //   }
+  //   # Add metadata we want to keep:
+  //   $photo->moderated = false;
+  //   $photo->created_at = (array_key_exists('created_at', $photo) ?
+  //     DateTime::createFromFormat(DateTime::ISO8601, $photo->created_at) :
+  //     \R::isoDateTime());
+  //   $id = \R::store($photo);
+  // }
 }

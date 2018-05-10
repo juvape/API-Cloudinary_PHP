@@ -107,7 +107,7 @@ namespace Cloudinary {
             $index = 0;
             $file_size = filesize($file);
             while (!feof($src)) {
-                $current_loc = $index * $chunk_size;
+                $current_loc = $index * $chunk_size * 2;
                 if ($current_loc >= $file_size) {
                     break;
                 }
