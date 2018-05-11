@@ -20,6 +20,7 @@ function create_photo($file_path, $orig_name)
       case 'top':
         $result = \Cloudinary\Uploader::upload($file_path,array(
           "timeout" => 360,
+          "invalidate" => true,
           "tags" => "",
           "public_id" => $folder . "/" . trim(str_replace('.jpg', "", $orig_name)),
           "image_metadata" => false,
@@ -36,6 +37,7 @@ function create_photo($file_path, $orig_name)
         case 'bottom':
           $result = \Cloudinary\Uploader::upload($file_path, array(
             "timeout" => 360,
+            "invalidate" => true,
             "tags" => "",
             "public_id" => $folder . "/" . trim(str_replace('.jpg', "", $orig_name)),
             "image_metadata" => false,
@@ -52,6 +54,7 @@ function create_photo($file_path, $orig_name)
         case 'set':
           $result = \Cloudinary\Uploader::upload($file_path, array(
             "timeout" => 360,
+            "invalidate" => true,
             "tags" => "",
             "public_id" => $folder . "/" . trim(str_replace('.jpg', "", $orig_name)),
             "image_metadata" => false,
@@ -68,6 +71,7 @@ function create_photo($file_path, $orig_name)
         case 'cut':
           $result = \Cloudinary\Uploader::upload($file_path, array(
             "timeout" => 360,
+            "invalidate" => true,
             "tags" => "",
             "public_id" => $folder . "/" . substr($orig_name, 0, 9),
             "image_metadata" => false,
@@ -83,6 +87,7 @@ function create_photo($file_path, $orig_name)
         case 'accesories':
           $result = \Cloudinary\Uploader::upload($file_path, array(
             "timeout" => 360,
+            "invalidate" => true,
             "tags" => "",
             "public_id" => $folder . "/" . trim(str_replace('.jpg', "", $orig_name)),
             "image_metadata" => false,
