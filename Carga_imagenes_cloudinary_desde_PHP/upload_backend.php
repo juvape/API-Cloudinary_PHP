@@ -8,8 +8,9 @@ function create_photo($file_path, $orig_name)
   $colour = $_POST['colour'];
   $type = $_POST['type'];
   $stylecode = $_POST['stylecode'];
+  $coleccion = $_POST['coleccion'];
 
-  if ($file_path == "" || $folder == "" || $type == "")
+  if ($file_path == "" || $folder == "" || $type == "" || $colour == "" || $coleccion == "")
   {
     header("Location: upload.php?vacios=true");
     exit;
@@ -18,20 +19,41 @@ function create_photo($file_path, $orig_name)
   {
     switch ($type) {
       case 'top':
-        $result = \Cloudinary\Uploader::upload($file_path,array(
-          "timeout" => 360,
-          "invalidate" => true,
-          "tags" => "",
-          "public_id" => $folder . "/" . trim(str_replace('.jpg', "", $orig_name)),
-          "image_metadata" => false,
-          "context" => array
-              (
-                "stylecode" => substr($orig_name, 0, 9),
-                "imagetype" => "high res",
-                "grouped" => "false",
-                "colour" => $colour
-              ),
-        ));
+        if ($coleccion == 'rapsodia')
+        {
+          $result = \Cloudinary\Uploader::upload($file_path,array(
+            "timeout" => 360,
+            "invalidate" => true,
+            "tags" => "",
+            "public_id" => $folder . "/" . trim(str_replace('.jpg', "", $orig_name)),
+            "image_metadata" => false,
+            "context" => array
+                (
+                  "stylecode" => substr($orig_name, 0, 10),
+                  "imagetype" => "high res",
+                  "grouped" => "false",
+                  "colour" => $colour
+                ),
+          ));
+        }
+        else
+        {
+          $result = \Cloudinary\Uploader::upload($file_path,array(
+            "timeout" => 360,
+            "invalidate" => true,
+            "tags" => "",
+            "public_id" => $folder . "/" . trim(str_replace('.jpg', "", $orig_name)),
+            "image_metadata" => false,
+            "context" => array
+                (
+                  "stylecode" => substr($orig_name, 0, 9),
+                  "imagetype" => "high res",
+                  "grouped" => "false",
+                  "colour" => $colour
+                ),
+          ));
+        }
+
         break;
 
         case 'bottom':

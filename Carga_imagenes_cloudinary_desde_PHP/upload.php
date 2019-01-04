@@ -69,6 +69,16 @@ require 'main.php';
                 <option value="accesories">Accesories (single level)</option>
               </select>
               <br/>
+              <label>Colección <span class="required"> * </span></label>
+              <select class="form-control" name="coleccion" id="coleccion">
+                <option value="">-----</option>
+                <option value="spring">Spring</option>
+                <option value="summer">Summer</option>
+                <option value="rapsodia">Rapsodia</option>
+                <option value="highsummer">High Summer</option>
+                <option value="otra">Otra</option>
+              </select>
+              <br/>
               <div id="oculto">
                 <label>Stylecode para la imágen</label>
                 <input class="form-control oculto" type="text" name="stylecode" placeholder="Stylecode">
@@ -87,6 +97,15 @@ require 'main.php';
         </center>
       </div>
     </div>
+    <div class="row" id="footer">
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-md-offset-5">
+        <footer>Copyright &copy; <?php echo date('Y'); ?></footer>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-m-4 col-lg-4">
+        &nbsp;&nbsp;
+      </div>
+    </div>
+    <br/>
   </body>
 
   <script src="js/scripts.js"></script>

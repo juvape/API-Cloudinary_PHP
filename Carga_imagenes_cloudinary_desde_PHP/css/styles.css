@@ -1,4 +1,4 @@
-body { font-family: Helvetica, Arial, sans-serif; color: #333; margin: 20px; width: 97% }
+body { font-family: Helvetica, Arial, sans-serif; color: #333; margin: 20px; width: 97%; background-color: #FCFCFC !important}
 
 #posterframe { position: absolute; right: 10px; top: 10px; }
 
@@ -62,3 +62,5 @@ td { vertical-align: top; padding-right: 5px; }
 #oculto{display: none;}
 
 #reset{border-radius: 3px; background: #F1F1F1;}
+
+#footer{background-color: #CCCCCC; margin: 0 200px; padding-top: 20px; font-weight: bold;}
